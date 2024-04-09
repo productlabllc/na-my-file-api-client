@@ -28,29 +28,29 @@ export interface CreateUserResponse {
      * @type {string}
      * @memberof CreateUserResponse
      */
-    firstName?: string;
+    FirstName?: string;
     /**
      * 
      * @type {string}
      * @memberof CreateUserResponse
      */
-    lastName?: string;
+    LastName?: string;
     /**
      * 
      * @type {string}
      * @memberof CreateUserResponse
      */
-    email?: string;
+    Email?: string;
     /**
      * 
      * @type {string}
      * @memberof CreateUserResponse
      */
-    legacyId?: string;
+    LegacyId?: string;
     /**
      * 
      * @type {string}
      * @memberof CreateUserResponse
      */
-    idpId?: string;
+    IdpId?: string;
 }

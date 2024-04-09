@@ -23,17 +23,17 @@ export interface CreateUserFileRequest {
      * @type {string}
      * @memberof CreateUserFileRequest
      */
-    userFamilyMemberId?: string;
+    UserFamilyMemberId?: string;
     /**
      * 
      * @type {string}
      * @memberof CreateUserFileRequest
      */
-    title: string;
+    Title: string;
     /**
      * 
      * @type {Array<CreateUserFileRequestFiles>}
      * @memberof CreateUserFileRequest
      */
-    files: Array<CreateUserFileRequestFiles>;
+    Files: Array<CreateUserFileRequestFiles>;
 }

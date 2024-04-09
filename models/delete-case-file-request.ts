@@ -22,5 +22,5 @@ export interface DeleteCaseFileRequest {
      * @type {Array<string>}
      * @memberof DeleteCaseFileRequest
      */
-    userFileIds: Array<string>;
+    UserFileIds: Array<string>;
 }

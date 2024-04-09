@@ -16,37 +16,42 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { AddCaseApplicantsRequestInner } from '../models';
+import { AddCaseApplicantsResponse } from '../models';
+import { AddCaseFamilyMembersRequestInner } from '../models';
 import { AddCaseFileRequest } from '../models';
 import { AddWorkFlowRequest } from '../models';
 import { AddWorkFlowResponse } from '../models';
 import { CaseApplicant } from '../models';
 import { CreateCaseRequestBody } from '../models';
+import { CreateCaseResponse } from '../models';
 import { CreateFamilyMemberRequest } from '../models';
+import { CreateFamilyMemberResponse } from '../models';
 import { CreateUserFileRequest } from '../models';
 import { CreateUserRequest } from '../models';
 import { CreateUserResponse } from '../models';
 import { DeleteCaseFileRequest } from '../models';
+import { DeleteFamilyMemberResponse } from '../models';
 import { DeleteUserFileRequest } from '../models';
-import { DeleteUsersFamilyResponse } from '../models';
 import { DeleteWorkFlowRequest } from '../models';
 import { DeleteWorkFlowResponse } from '../models';
+import { FamilyMember } from '../models';
 import { Filters } from '../models';
 import { GetCaseResponse } from '../models';
-import { GetCaseUserFilesResponse } from '../models';
 import { GetUserActivityResponse } from '../models';
 import { GetUserFileCasesResponse } from '../models';
 import { GetUserFilesResponse } from '../models';
 import { GetUserWorkFlowsResponse } from '../models';
-import { InlineResponse200 } from '../models';
+import { Language } from '../models';
+import { UpdateCaseFileRequest } from '../models';
 import { UpdateCaseRequestBody } from '../models';
+import { UpdateCaseResponse } from '../models';
+import { UpdateFamilyMemberRequest } from '../models';
+import { UpdateFamilyMemberResponse } from '../models';
 import { UpdateGeneratedFileRequest } from '../models';
 import { UpdateGeneratedFileResponse } from '../models';
-import { UpdateUserFamilyRequest } from '../models';
 import { UpdateUserRequest } from '../models';
 import { UpdateUserResponse } from '../models';
 import { User } from '../models';
-import { UserFamily } from '../models';
 import { UserFileDownloadResponse } from '../models';
 import { Workflow } from '../models';
 /**
@@ -56,18 +61,18 @@ import { Workflow } from '../models';
 export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Add case applicants
+         * Add case family members
          * @param {string} caseId 
-         * @param {Array<AddCaseApplicantsRequestInner>} [body] Default response body
+         * @param {Array<AddCaseFamilyMembersRequestInner>} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addCaseApplicants: async (caseId: string, body?: Array<AddCaseApplicantsRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addCaseFamilyMembers: async (caseId: string, body?: Array<AddCaseFamilyMembersRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'caseId' is not null or undefined
             if (caseId === null || caseId === undefined) {
-                throw new RequiredError('caseId','Required parameter caseId was null or undefined when calling addCaseApplicants.');
+                throw new RequiredError('caseId','Required parameter caseId was null or undefined when calling addCaseFamilyMembers.');
             }
-            const localVarPath = `/case/{caseId}/applicants`
+            const localVarPath = `/case/{caseId}/family-members`
                 .replace(`{${"caseId"}}`, encodeURIComponent(String(caseId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -336,10 +341,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Delete a case
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCase: async (caseId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteCase: async (caseId: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'caseId' is not null or undefined
             if (caseId === null || caseId === undefined) {
                 throw new RequiredError('caseId','Required parameter caseId was null or undefined when calling deleteCase.');
@@ -356,6 +362,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -366,6 +374,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -373,18 +383,18 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Delete case applicants
+         * Delete case family members
          * @param {string} caseId 
-         * @param {Array<AddCaseApplicantsRequestInner>} [body] Default response body
+         * @param {Array<AddCaseFamilyMembersRequestInner>} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCaseApplicants: async (caseId: string, body?: Array<AddCaseApplicantsRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteCaseFamilyMembers: async (caseId: string, body?: Array<AddCaseFamilyMembersRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'caseId' is not null or undefined
             if (caseId === null || caseId === undefined) {
-                throw new RequiredError('caseId','Required parameter caseId was null or undefined when calling deleteCaseApplicants.');
+                throw new RequiredError('caseId','Required parameter caseId was null or undefined when calling deleteCaseFamilyMembers.');
             }
-            const localVarPath = `/case/{caseId}/applicants`
+            const localVarPath = `/case/{caseId}/family-members`
                 .replace(`{${"caseId"}}`, encodeURIComponent(String(caseId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -500,10 +510,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Delete user
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteUser: async (body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -515,6 +526,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -525,6 +538,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -572,10 +587,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Get a single case
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCase: async (caseId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCase: async (caseId: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'caseId' is not null or undefined
             if (caseId === null || caseId === undefined) {
                 throw new RequiredError('caseId','Required parameter caseId was null or undefined when calling getCase.');
@@ -592,6 +608,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -602,6 +620,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -609,17 +629,18 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Get case applicants
+         * Get case family members
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCaseApplicants: async (caseId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCaseFamilyMembers: async (caseId: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'caseId' is not null or undefined
             if (caseId === null || caseId === undefined) {
-                throw new RequiredError('caseId','Required parameter caseId was null or undefined when calling getCaseApplicants.');
+                throw new RequiredError('caseId','Required parameter caseId was null or undefined when calling getCaseFamilyMembers.');
             }
-            const localVarPath = `/case/{caseId}/applicants`
+            const localVarPath = `/case/{caseId}/family-members`
                 .replace(`{${"caseId"}}`, encodeURIComponent(String(caseId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -631,6 +652,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -641,6 +664,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -648,15 +673,16 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Get user files for a case
+         * Get case files
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCaseFiles: async (caseId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCaseFileListing: async (caseId: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'caseId' is not null or undefined
             if (caseId === null || caseId === undefined) {
-                throw new RequiredError('caseId','Required parameter caseId was null or undefined when calling getCaseFiles.');
+                throw new RequiredError('caseId','Required parameter caseId was null or undefined when calling getCaseFileListing.');
             }
             const localVarPath = `/cases/{caseId}/files`
                 .replace(`{${"caseId"}}`, encodeURIComponent(String(caseId)));
@@ -670,6 +696,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -680,6 +708,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -688,10 +718,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Get user cases
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCases: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCases: async (body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/cases`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -703,6 +734,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -713,6 +746,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -722,10 +757,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Get user family member
          * @param {string} id 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFamilyMember: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFamilyMember: async (id: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling getFamilyMember.');
@@ -742,6 +778,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -752,6 +790,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -760,10 +800,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Get user family members
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFamilyMembers: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFamilyMembers: async (body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/user/family`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -775,6 +816,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -785,6 +828,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -795,10 +840,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * Get generated file download url
          * @param {string} generatedFileId 
          * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGeneratedFileDownloadUrl: async (generatedFileId: string, userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getGeneratedFileDownloadUrl: async (generatedFileId: string, userId: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'generatedFileId' is not null or undefined
             if (generatedFileId === null || generatedFileId === undefined) {
                 throw new RequiredError('generatedFileId','Required parameter generatedFileId was null or undefined when calling getGeneratedFileDownloadUrl.');
@@ -826,6 +872,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['userId'] = userId;
             }
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -836,6 +884,46 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get myfile languages
+         * @param {any} [body] Default response body
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getLanguages: async (body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/languages`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -844,10 +932,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Get NYCID user data
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUser: async (body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -859,6 +948,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -869,6 +960,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -880,10 +973,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {Filters} filters 
          * @param {number} page 
          * @param {number} limit 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserActivity: async (filters: Filters, page: number, limit: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserActivity: async (filters: Filters, page: number, limit: number, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'filters' is not null or undefined
             if (filters === null || filters === undefined) {
                 throw new RequiredError('filters','Required parameter filters was null or undefined when calling getUserActivity.');
@@ -919,6 +1013,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['limit'] = limit;
             }
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -929,6 +1025,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -938,15 +1036,22 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Get user family member files.
          * @param {string} userFamilyMemberId 
+         * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserFamilyMemberFiles: async (userFamilyMemberId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserFamilyMemberFiles: async (userFamilyMemberId: string, userId: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userFamilyMemberId' is not null or undefined
             if (userFamilyMemberId === null || userFamilyMemberId === undefined) {
                 throw new RequiredError('userFamilyMemberId','Required parameter userFamilyMemberId was null or undefined when calling getUserFamilyMemberFiles.');
             }
-            const localVarPath = `/users/files/family-member`;
+            // verify required parameter 'userId' is not null or undefined
+            if (userId === null || userId === undefined) {
+                throw new RequiredError('userId','Required parameter userId was null or undefined when calling getUserFamilyMemberFiles.');
+            }
+            const localVarPath = `/users/{userId}/files/family-member`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -961,6 +1066,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['userFamilyMemberId'] = userFamilyMemberId;
             }
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -971,6 +1078,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -980,16 +1089,23 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Get cases for user file.
          * @param {string} fileId 
+         * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserFileCases: async (fileId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserFileCases: async (fileId: string, userId: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             if (fileId === null || fileId === undefined) {
                 throw new RequiredError('fileId','Required parameter fileId was null or undefined when calling getUserFileCases.');
             }
+            // verify required parameter 'userId' is not null or undefined
+            if (userId === null || userId === undefined) {
+                throw new RequiredError('userId','Required parameter userId was null or undefined when calling getUserFileCases.');
+            }
             const localVarPath = `/users/files/{fileId}/cases`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)))
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -1000,6 +1116,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -1010,6 +1128,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -1020,10 +1140,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * Get download url for user file.
          * @param {string} fileId 
          * @param {string} uploadVersionId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserFileDownloadUrl: async (fileId: string, uploadVersionId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserFileDownloadUrl: async (fileId: string, uploadVersionId: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             if (fileId === null || fileId === undefined) {
                 throw new RequiredError('fileId','Required parameter fileId was null or undefined when calling getUserFileDownloadUrl.');
@@ -1051,6 +1172,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['uploadVersionId'] = uploadVersionId;
             }
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -1061,6 +1184,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -1069,11 +1194,18 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Get user files.
+         * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserFiles: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/users/files`;
+        getUserFiles: async (userId: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            if (userId === null || userId === undefined) {
+                throw new RequiredError('userId','Required parameter userId was null or undefined when calling getUserFiles.');
+            }
+            const localVarPath = `/users/{userId}/files`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -1084,6 +1216,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -1094,6 +1228,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -1102,10 +1238,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Get user workflows
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserWorkflows: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserWorkflows: async (body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/users/workflows`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -1117,6 +1254,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -1127,6 +1266,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -1135,10 +1276,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Get myfile workflows
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkflows: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getWorkflows: async (body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/workflows`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -1150,6 +1292,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -1160,6 +1304,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -1169,10 +1315,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Post message to connections
          * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        messagingPostMessageToWsConnectionsPost: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        messagingPostMessageToWsConnectionsPost: async (userId: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             if (userId === null || userId === undefined) {
                 throw new RequiredError('userId','Required parameter userId was null or undefined when calling messagingPostMessageToWsConnectionsPost.');
@@ -1189,6 +1336,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -1199,6 +1348,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -1288,6 +1439,50 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Update case file
+         * @param {string} id 
+         * @param {UpdateCaseFileRequest} [body] Default response body
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCaseFile: async (id: string, body?: UpdateCaseFileRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling updateCaseFile.');
+            }
+            const localVarPath = `/cases/files/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Update generated file
          * @param {UpdateGeneratedFileRequest} [body] Default response body
          * @param {*} [options] Override http request option.
@@ -1327,12 +1522,18 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Update user.
+         * @param {string} userId 
          * @param {UpdateUserRequest} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateUser: async (body?: UpdateUserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/users`;
+        updateUser: async (userId: string, body?: UpdateUserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            if (userId === null || userId === undefined) {
+                throw new RequiredError('userId','Required parameter userId was null or undefined when calling updateUser.');
+            }
+            const localVarPath = `/users`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -1365,11 +1566,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Update user family member
-         * @param {UpdateUserFamilyRequest} [body] Default response body
+         * @param {UpdateFamilyMemberRequest} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateUserFamilyMember: async (body?: UpdateUserFamilyRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateUserFamilyMember: async (body?: UpdateFamilyMemberRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/user/family`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -1403,11 +1604,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Update user file.
-         * @param {UpdateUserFamilyRequest} [body] Default response body
+         * @param {UpdateFamilyMemberRequest} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateUserFile: async (body?: UpdateUserFamilyRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateUserFile: async (body?: UpdateFamilyMemberRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/users/files`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -1449,14 +1650,14 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 export const DefaultApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * Add case applicants
+         * Add case family members
          * @param {string} caseId 
-         * @param {Array<AddCaseApplicantsRequestInner>} [body] Default response body
+         * @param {Array<AddCaseFamilyMembersRequestInner>} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addCaseApplicants(caseId: string, body?: Array<AddCaseApplicantsRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<CaseApplicant>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).addCaseApplicants(caseId, body, options);
+        async addCaseFamilyMembers(caseId: string, body?: Array<AddCaseFamilyMembersRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AddCaseApplicantsResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).addCaseFamilyMembers(caseId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1469,7 +1670,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addCaseFiles(caseId: string, body?: AddCaseFileRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async addCaseFiles(caseId: string, body?: AddCaseFileRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).addCaseFiles(caseId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1495,7 +1696,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createCase(body?: CreateCaseRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse200>>> {
+        async createCase(body?: CreateCaseRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<CreateCaseResponse>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).createCase(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1521,7 +1722,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createUserFamilyMember(body?: CreateFamilyMemberRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserFamily>>> {
+        async createUserFamilyMember(body?: CreateFamilyMemberRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<CreateFamilyMemberResponse>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).createUserFamilyMember(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1544,25 +1745,26 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * Delete a case
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCase(caseId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).deleteCase(caseId, options);
+        async deleteCase(caseId: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).deleteCase(caseId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
         /**
-         * Delete case applicants
+         * Delete case family members
          * @param {string} caseId 
-         * @param {Array<AddCaseApplicantsRequestInner>} [body] Default response body
+         * @param {Array<AddCaseFamilyMembersRequestInner>} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCaseApplicants(caseId: string, body?: Array<AddCaseApplicantsRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).deleteCaseApplicants(caseId, body, options);
+        async deleteCaseFamilyMembers(caseId: string, body?: Array<AddCaseFamilyMembersRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).deleteCaseFamilyMembers(caseId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1575,7 +1777,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCaseFiles(caseId: string, body?: DeleteCaseFileRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async deleteCaseFiles(caseId: string, body?: DeleteCaseFileRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).deleteCaseFiles(caseId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1588,7 +1790,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteFamilyMember(body?: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<DeleteUsersFamilyResponse>>> {
+        async deleteFamilyMember(body?: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<DeleteFamilyMemberResponse>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).deleteFamilyMember(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1597,11 +1799,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * Delete user
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).deleteUser(options);
+        async deleteUser(body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).deleteUser(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1613,7 +1816,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteUserFile(body?: DeleteUserFileRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async deleteUserFile(body?: DeleteUserFileRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).deleteUserFile(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1623,37 +1826,40 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * Get a single case
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCase(caseId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse200>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getCase(caseId, options);
+        async getCase(caseId: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetCaseResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getCase(caseId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
         /**
-         * Get case applicants
+         * Get case family members
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCaseApplicants(caseId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<CaseApplicant>>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getCaseApplicants(caseId, options);
+        async getCaseFamilyMembers(caseId: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<CaseApplicant>>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getCaseFamilyMembers(caseId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
         /**
-         * Get user files for a case
+         * Get case files
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCaseFiles(caseId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetCaseUserFilesResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getCaseFiles(caseId, options);
+        async getCaseFileListing(caseId: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getCaseFileListing(caseId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1661,11 +1867,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get user cases
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCases(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetCaseResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getCases(options);
+        async getCases(body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetCaseResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getCases(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1674,11 +1881,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * Get user family member
          * @param {string} id 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFamilyMember(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserFamily>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getFamilyMember(id, options);
+        async getFamilyMember(id: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<FamilyMember>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getFamilyMember(id, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1686,11 +1894,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get user family members
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFamilyMembers(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<UserFamily>>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getFamilyMembers(options);
+        async getFamilyMembers(body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<FamilyMember>>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getFamilyMembers(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1700,11 +1909,25 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * Get generated file download url
          * @param {string} generatedFileId 
          * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGeneratedFileDownloadUrl(generatedFileId: string, userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserFileDownloadResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getGeneratedFileDownloadUrl(generatedFileId, userId, options);
+        async getGeneratedFileDownloadUrl(generatedFileId: string, userId: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserFileDownloadResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getGeneratedFileDownloadUrl(generatedFileId, userId, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Get myfile languages
+         * @param {any} [body] Default response body
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getLanguages(body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Language>>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getLanguages(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1712,11 +1935,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get NYCID user data
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<User>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUser(options);
+        async getUser(body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<User>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUser(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1727,11 +1951,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {Filters} filters 
          * @param {number} page 
          * @param {number} limit 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserActivity(filters: Filters, page: number, limit: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetUserActivityResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserActivity(filters, page, limit, options);
+        async getUserActivity(filters: Filters, page: number, limit: number, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetUserActivityResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserActivity(filters, page, limit, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1740,11 +1965,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * Get user family member files.
          * @param {string} userFamilyMemberId 
+         * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserFamilyMemberFiles(userFamilyMemberId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetUserFilesResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserFamilyMemberFiles(userFamilyMemberId, options);
+        async getUserFamilyMemberFiles(userFamilyMemberId: string, userId: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetUserFilesResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserFamilyMemberFiles(userFamilyMemberId, userId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1753,11 +1980,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * Get cases for user file.
          * @param {string} fileId 
+         * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserFileCases(fileId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetUserFileCasesResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserFileCases(fileId, options);
+        async getUserFileCases(fileId: string, userId: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetUserFileCasesResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserFileCases(fileId, userId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1767,11 +1996,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * Get download url for user file.
          * @param {string} fileId 
          * @param {string} uploadVersionId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserFileDownloadUrl(fileId: string, uploadVersionId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserFileDownloadResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserFileDownloadUrl(fileId, uploadVersionId, options);
+        async getUserFileDownloadUrl(fileId: string, uploadVersionId: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserFileDownloadResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserFileDownloadUrl(fileId, uploadVersionId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1779,11 +2009,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get user files.
+         * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserFiles(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetUserFilesResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserFiles(options);
+        async getUserFiles(userId: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetUserFilesResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserFiles(userId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1791,11 +2023,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get user workflows
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserWorkflows(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetUserWorkFlowsResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserWorkflows(options);
+        async getUserWorkflows(body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetUserWorkFlowsResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUserWorkflows(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1803,11 +2036,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get myfile workflows
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWorkflows(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Workflow>>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getWorkflows(options);
+        async getWorkflows(body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Workflow>>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getWorkflows(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1816,11 +2050,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * Post message to connections
          * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async messagingPostMessageToWsConnectionsPost(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).messagingPostMessageToWsConnectionsPost(userId, options);
+        async messagingPostMessageToWsConnectionsPost(userId: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).messagingPostMessageToWsConnectionsPost(userId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1846,8 +2081,22 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCase(caseId: string, body?: UpdateCaseRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse200>>> {
+        async updateCase(caseId: string, body?: UpdateCaseRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UpdateCaseResponse>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).updateCase(caseId, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Update case file
+         * @param {string} id 
+         * @param {UpdateCaseFileRequest} [body] Default response body
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateCaseFile(id: string, body?: UpdateCaseFileRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).updateCaseFile(id, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1868,12 +2117,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * Update user.
+         * @param {string} userId 
          * @param {UpdateUserRequest} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateUser(body?: UpdateUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UpdateUserResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).updateUser(body, options);
+        async updateUser(userId: string, body?: UpdateUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UpdateUserResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).updateUser(userId, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1881,11 +2131,11 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * Update user family member
-         * @param {UpdateUserFamilyRequest} [body] Default response body
+         * @param {UpdateFamilyMemberRequest} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateUserFamilyMember(body?: UpdateUserFamilyRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserFamily>>> {
+        async updateUserFamilyMember(body?: UpdateFamilyMemberRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UpdateFamilyMemberResponse>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).updateUserFamilyMember(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1894,11 +2144,11 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * Update user file.
-         * @param {UpdateUserFamilyRequest} [body] Default response body
+         * @param {UpdateFamilyMemberRequest} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateUserFile(body?: UpdateUserFamilyRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserFamily>>> {
+        async updateUserFile(body?: UpdateFamilyMemberRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UpdateFamilyMemberResponse>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).updateUserFile(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1915,14 +2165,14 @@ export const DefaultApiFp = function(configuration?: Configuration) {
 export const DefaultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * Add case applicants
+         * Add case family members
          * @param {string} caseId 
-         * @param {Array<AddCaseApplicantsRequestInner>} [body] Default response body
+         * @param {Array<AddCaseFamilyMembersRequestInner>} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addCaseApplicants(caseId: string, body?: Array<AddCaseApplicantsRequestInner>, options?: AxiosRequestConfig): Promise<AxiosResponse<CaseApplicant>> {
-            return DefaultApiFp(configuration).addCaseApplicants(caseId, body, options).then((request) => request(axios, basePath));
+        async addCaseFamilyMembers(caseId: string, body?: Array<AddCaseFamilyMembersRequestInner>, options?: AxiosRequestConfig): Promise<AxiosResponse<AddCaseApplicantsResponse>> {
+            return DefaultApiFp(configuration).addCaseFamilyMembers(caseId, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Add case files
@@ -1931,7 +2181,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addCaseFiles(caseId: string, body?: AddCaseFileRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async addCaseFiles(caseId: string, body?: AddCaseFileRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
             return DefaultApiFp(configuration).addCaseFiles(caseId, body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1949,7 +2199,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createCase(body?: CreateCaseRequestBody, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse200>> {
+        async createCase(body?: CreateCaseRequestBody, options?: AxiosRequestConfig): Promise<AxiosResponse<CreateCaseResponse>> {
             return DefaultApiFp(configuration).createCase(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1967,7 +2217,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createUserFamilyMember(body?: CreateFamilyMemberRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<UserFamily>> {
+        async createUserFamilyMember(body?: CreateFamilyMemberRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<CreateFamilyMemberResponse>> {
             return DefaultApiFp(configuration).createUserFamilyMember(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1982,21 +2232,22 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * Delete a case
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCase(caseId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return DefaultApiFp(configuration).deleteCase(caseId, options).then((request) => request(axios, basePath));
+        async deleteCase(caseId: string, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
+            return DefaultApiFp(configuration).deleteCase(caseId, body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Delete case applicants
+         * Delete case family members
          * @param {string} caseId 
-         * @param {Array<AddCaseApplicantsRequestInner>} [body] Default response body
+         * @param {Array<AddCaseFamilyMembersRequestInner>} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCaseApplicants(caseId: string, body?: Array<AddCaseApplicantsRequestInner>, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return DefaultApiFp(configuration).deleteCaseApplicants(caseId, body, options).then((request) => request(axios, basePath));
+        async deleteCaseFamilyMembers(caseId: string, body?: Array<AddCaseFamilyMembersRequestInner>, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
+            return DefaultApiFp(configuration).deleteCaseFamilyMembers(caseId, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete case files
@@ -2005,7 +2256,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCaseFiles(caseId: string, body?: DeleteCaseFileRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async deleteCaseFiles(caseId: string, body?: DeleteCaseFileRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
             return DefaultApiFp(configuration).deleteCaseFiles(caseId, body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2014,16 +2265,17 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteFamilyMember(body?: Array<string>, options?: AxiosRequestConfig): Promise<AxiosResponse<DeleteUsersFamilyResponse>> {
+        async deleteFamilyMember(body?: Array<string>, options?: AxiosRequestConfig): Promise<AxiosResponse<DeleteFamilyMemberResponse>> {
             return DefaultApiFp(configuration).deleteFamilyMember(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete user
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteUser(options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return DefaultApiFp(configuration).deleteUser(options).then((request) => request(axios, basePath));
+        async deleteUser(body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
+            return DefaultApiFp(configuration).deleteUser(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete user file.
@@ -2031,150 +2283,178 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteUserFile(body?: DeleteUserFileRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async deleteUserFile(body?: DeleteUserFileRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
             return DefaultApiFp(configuration).deleteUserFile(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a single case
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCase(caseId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse200>> {
-            return DefaultApiFp(configuration).getCase(caseId, options).then((request) => request(axios, basePath));
+        async getCase(caseId: string, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<GetCaseResponse>> {
+            return DefaultApiFp(configuration).getCase(caseId, body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get case applicants
+         * Get case family members
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCaseApplicants(caseId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<CaseApplicant>>> {
-            return DefaultApiFp(configuration).getCaseApplicants(caseId, options).then((request) => request(axios, basePath));
+        async getCaseFamilyMembers(caseId: string, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<CaseApplicant>>> {
+            return DefaultApiFp(configuration).getCaseFamilyMembers(caseId, body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get user files for a case
+         * Get case files
          * @param {string} caseId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCaseFiles(caseId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<GetCaseUserFilesResponse>> {
-            return DefaultApiFp(configuration).getCaseFiles(caseId, options).then((request) => request(axios, basePath));
+        async getCaseFileListing(caseId: string, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
+            return DefaultApiFp(configuration).getCaseFileListing(caseId, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get user cases
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCases(options?: AxiosRequestConfig): Promise<AxiosResponse<GetCaseResponse>> {
-            return DefaultApiFp(configuration).getCases(options).then((request) => request(axios, basePath));
+        async getCases(body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<GetCaseResponse>> {
+            return DefaultApiFp(configuration).getCases(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get user family member
          * @param {string} id 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFamilyMember(id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<UserFamily>> {
-            return DefaultApiFp(configuration).getFamilyMember(id, options).then((request) => request(axios, basePath));
+        async getFamilyMember(id: string, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<FamilyMember>> {
+            return DefaultApiFp(configuration).getFamilyMember(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get user family members
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFamilyMembers(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<UserFamily>>> {
-            return DefaultApiFp(configuration).getFamilyMembers(options).then((request) => request(axios, basePath));
+        async getFamilyMembers(body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<FamilyMember>>> {
+            return DefaultApiFp(configuration).getFamilyMembers(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get generated file download url
          * @param {string} generatedFileId 
          * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGeneratedFileDownloadUrl(generatedFileId: string, userId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<UserFileDownloadResponse>> {
-            return DefaultApiFp(configuration).getGeneratedFileDownloadUrl(generatedFileId, userId, options).then((request) => request(axios, basePath));
+        async getGeneratedFileDownloadUrl(generatedFileId: string, userId: string, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<UserFileDownloadResponse>> {
+            return DefaultApiFp(configuration).getGeneratedFileDownloadUrl(generatedFileId, userId, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get myfile languages
+         * @param {any} [body] Default response body
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getLanguages(body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Language>>> {
+            return DefaultApiFp(configuration).getLanguages(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get NYCID user data
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUser(options?: AxiosRequestConfig): Promise<AxiosResponse<User>> {
-            return DefaultApiFp(configuration).getUser(options).then((request) => request(axios, basePath));
+        async getUser(body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<User>> {
+            return DefaultApiFp(configuration).getUser(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get user activity.
          * @param {Filters} filters 
          * @param {number} page 
          * @param {number} limit 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserActivity(filters: Filters, page: number, limit: number, options?: AxiosRequestConfig): Promise<AxiosResponse<GetUserActivityResponse>> {
-            return DefaultApiFp(configuration).getUserActivity(filters, page, limit, options).then((request) => request(axios, basePath));
+        async getUserActivity(filters: Filters, page: number, limit: number, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<GetUserActivityResponse>> {
+            return DefaultApiFp(configuration).getUserActivity(filters, page, limit, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get user family member files.
          * @param {string} userFamilyMemberId 
+         * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserFamilyMemberFiles(userFamilyMemberId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<GetUserFilesResponse>> {
-            return DefaultApiFp(configuration).getUserFamilyMemberFiles(userFamilyMemberId, options).then((request) => request(axios, basePath));
+        async getUserFamilyMemberFiles(userFamilyMemberId: string, userId: string, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<GetUserFilesResponse>> {
+            return DefaultApiFp(configuration).getUserFamilyMemberFiles(userFamilyMemberId, userId, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get cases for user file.
          * @param {string} fileId 
+         * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserFileCases(fileId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<GetUserFileCasesResponse>> {
-            return DefaultApiFp(configuration).getUserFileCases(fileId, options).then((request) => request(axios, basePath));
+        async getUserFileCases(fileId: string, userId: string, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<GetUserFileCasesResponse>> {
+            return DefaultApiFp(configuration).getUserFileCases(fileId, userId, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get download url for user file.
          * @param {string} fileId 
          * @param {string} uploadVersionId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserFileDownloadUrl(fileId: string, uploadVersionId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<UserFileDownloadResponse>> {
-            return DefaultApiFp(configuration).getUserFileDownloadUrl(fileId, uploadVersionId, options).then((request) => request(axios, basePath));
+        async getUserFileDownloadUrl(fileId: string, uploadVersionId: string, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<UserFileDownloadResponse>> {
+            return DefaultApiFp(configuration).getUserFileDownloadUrl(fileId, uploadVersionId, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get user files.
+         * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserFiles(options?: AxiosRequestConfig): Promise<AxiosResponse<GetUserFilesResponse>> {
-            return DefaultApiFp(configuration).getUserFiles(options).then((request) => request(axios, basePath));
+        async getUserFiles(userId: string, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<GetUserFilesResponse>> {
+            return DefaultApiFp(configuration).getUserFiles(userId, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get user workflows
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserWorkflows(options?: AxiosRequestConfig): Promise<AxiosResponse<GetUserWorkFlowsResponse>> {
-            return DefaultApiFp(configuration).getUserWorkflows(options).then((request) => request(axios, basePath));
+        async getUserWorkflows(body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<GetUserWorkFlowsResponse>> {
+            return DefaultApiFp(configuration).getUserWorkflows(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Get myfile workflows
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWorkflows(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Workflow>>> {
-            return DefaultApiFp(configuration).getWorkflows(options).then((request) => request(axios, basePath));
+        async getWorkflows(body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Workflow>>> {
+            return DefaultApiFp(configuration).getWorkflows(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Post message to connections
          * @param {string} userId 
+         * @param {any} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async messagingPostMessageToWsConnectionsPost(userId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return DefaultApiFp(configuration).messagingPostMessageToWsConnectionsPost(userId, options).then((request) => request(axios, basePath));
+        async messagingPostMessageToWsConnectionsPost(userId: string, body?: any, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
+            return DefaultApiFp(configuration).messagingPostMessageToWsConnectionsPost(userId, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Remove user workflow
@@ -2192,8 +2472,18 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCase(caseId: string, body?: UpdateCaseRequestBody, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse200>> {
+        async updateCase(caseId: string, body?: UpdateCaseRequestBody, options?: AxiosRequestConfig): Promise<AxiosResponse<UpdateCaseResponse>> {
             return DefaultApiFp(configuration).updateCase(caseId, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Update case file
+         * @param {string} id 
+         * @param {UpdateCaseFileRequest} [body] Default response body
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateCaseFile(id: string, body?: UpdateCaseFileRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
+            return DefaultApiFp(configuration).updateCaseFile(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Update generated file
@@ -2206,29 +2496,30 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Update user.
+         * @param {string} userId 
          * @param {UpdateUserRequest} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateUser(body?: UpdateUserRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<UpdateUserResponse>> {
-            return DefaultApiFp(configuration).updateUser(body, options).then((request) => request(axios, basePath));
+        async updateUser(userId: string, body?: UpdateUserRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<UpdateUserResponse>> {
+            return DefaultApiFp(configuration).updateUser(userId, body, options).then((request) => request(axios, basePath));
         },
         /**
          * Update user family member
-         * @param {UpdateUserFamilyRequest} [body] Default response body
+         * @param {UpdateFamilyMemberRequest} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateUserFamilyMember(body?: UpdateUserFamilyRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<UserFamily>> {
+        async updateUserFamilyMember(body?: UpdateFamilyMemberRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<UpdateFamilyMemberResponse>> {
             return DefaultApiFp(configuration).updateUserFamilyMember(body, options).then((request) => request(axios, basePath));
         },
         /**
          * Update user file.
-         * @param {UpdateUserFamilyRequest} [body] Default response body
+         * @param {UpdateFamilyMemberRequest} [body] Default response body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateUserFile(body?: UpdateUserFamilyRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<UserFamily>> {
+        async updateUserFile(body?: UpdateFamilyMemberRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<UpdateFamilyMemberResponse>> {
             return DefaultApiFp(configuration).updateUserFile(body, options).then((request) => request(axios, basePath));
         },
     };
@@ -2242,15 +2533,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
  */
 export class DefaultApi extends BaseAPI {
     /**
-     * Add case applicants
+     * Add case family members
      * @param {string} caseId 
-     * @param {Array<AddCaseApplicantsRequestInner>} [body] Default response body
+     * @param {Array<AddCaseFamilyMembersRequestInner>} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async addCaseApplicants(caseId: string, body?: Array<AddCaseApplicantsRequestInner>, options?: AxiosRequestConfig) : Promise<AxiosResponse<CaseApplicant>> {
-        return DefaultApiFp(this.configuration).addCaseApplicants(caseId, body, options).then((request) => request(this.axios, this.basePath));
+    public async addCaseFamilyMembers(caseId: string, body?: Array<AddCaseFamilyMembersRequestInner>, options?: AxiosRequestConfig) : Promise<AxiosResponse<AddCaseApplicantsResponse>> {
+        return DefaultApiFp(this.configuration).addCaseFamilyMembers(caseId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Add case files
@@ -2260,7 +2551,7 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async addCaseFiles(caseId: string, body?: AddCaseFileRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async addCaseFiles(caseId: string, body?: AddCaseFileRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
         return DefaultApiFp(this.configuration).addCaseFiles(caseId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -2280,7 +2571,7 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async createCase(body?: CreateCaseRequestBody, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse200>> {
+    public async createCase(body?: CreateCaseRequestBody, options?: AxiosRequestConfig) : Promise<AxiosResponse<CreateCaseResponse>> {
         return DefaultApiFp(this.configuration).createCase(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -2300,7 +2591,7 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async createUserFamilyMember(body?: CreateFamilyMemberRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserFamily>> {
+    public async createUserFamilyMember(body?: CreateFamilyMemberRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<CreateFamilyMemberResponse>> {
         return DefaultApiFp(this.configuration).createUserFamilyMember(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -2316,23 +2607,24 @@ export class DefaultApi extends BaseAPI {
     /**
      * Delete a case
      * @param {string} caseId 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async deleteCase(caseId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return DefaultApiFp(this.configuration).deleteCase(caseId, options).then((request) => request(this.axios, this.basePath));
+    public async deleteCase(caseId: string, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
+        return DefaultApiFp(this.configuration).deleteCase(caseId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Delete case applicants
+     * Delete case family members
      * @param {string} caseId 
-     * @param {Array<AddCaseApplicantsRequestInner>} [body] Default response body
+     * @param {Array<AddCaseFamilyMembersRequestInner>} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async deleteCaseApplicants(caseId: string, body?: Array<AddCaseApplicantsRequestInner>, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return DefaultApiFp(this.configuration).deleteCaseApplicants(caseId, body, options).then((request) => request(this.axios, this.basePath));
+    public async deleteCaseFamilyMembers(caseId: string, body?: Array<AddCaseFamilyMembersRequestInner>, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
+        return DefaultApiFp(this.configuration).deleteCaseFamilyMembers(caseId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Delete case files
@@ -2342,7 +2634,7 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async deleteCaseFiles(caseId: string, body?: DeleteCaseFileRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async deleteCaseFiles(caseId: string, body?: DeleteCaseFileRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
         return DefaultApiFp(this.configuration).deleteCaseFiles(caseId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -2352,17 +2644,18 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async deleteFamilyMember(body?: Array<string>, options?: AxiosRequestConfig) : Promise<AxiosResponse<DeleteUsersFamilyResponse>> {
+    public async deleteFamilyMember(body?: Array<string>, options?: AxiosRequestConfig) : Promise<AxiosResponse<DeleteFamilyMemberResponse>> {
         return DefaultApiFp(this.configuration).deleteFamilyMember(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Delete user
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async deleteUser(options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return DefaultApiFp(this.configuration).deleteUser(options).then((request) => request(this.axios, this.basePath));
+    public async deleteUser(body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
+        return DefaultApiFp(this.configuration).deleteUser(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Delete user file.
@@ -2371,166 +2664,195 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async deleteUserFile(body?: DeleteUserFileRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async deleteUserFile(body?: DeleteUserFileRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
         return DefaultApiFp(this.configuration).deleteUserFile(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get a single case
      * @param {string} caseId 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getCase(caseId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse200>> {
-        return DefaultApiFp(this.configuration).getCase(caseId, options).then((request) => request(this.axios, this.basePath));
+    public async getCase(caseId: string, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetCaseResponse>> {
+        return DefaultApiFp(this.configuration).getCase(caseId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Get case applicants
+     * Get case family members
      * @param {string} caseId 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getCaseApplicants(caseId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<CaseApplicant>>> {
-        return DefaultApiFp(this.configuration).getCaseApplicants(caseId, options).then((request) => request(this.axios, this.basePath));
+    public async getCaseFamilyMembers(caseId: string, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<CaseApplicant>>> {
+        return DefaultApiFp(this.configuration).getCaseFamilyMembers(caseId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Get user files for a case
+     * Get case files
      * @param {string} caseId 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getCaseFiles(caseId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetCaseUserFilesResponse>> {
-        return DefaultApiFp(this.configuration).getCaseFiles(caseId, options).then((request) => request(this.axios, this.basePath));
+    public async getCaseFileListing(caseId: string, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
+        return DefaultApiFp(this.configuration).getCaseFileListing(caseId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get user cases
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getCases(options?: AxiosRequestConfig) : Promise<AxiosResponse<GetCaseResponse>> {
-        return DefaultApiFp(this.configuration).getCases(options).then((request) => request(this.axios, this.basePath));
+    public async getCases(body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetCaseResponse>> {
+        return DefaultApiFp(this.configuration).getCases(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get user family member
      * @param {string} id 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getFamilyMember(id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserFamily>> {
-        return DefaultApiFp(this.configuration).getFamilyMember(id, options).then((request) => request(this.axios, this.basePath));
+    public async getFamilyMember(id: string, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<FamilyMember>> {
+        return DefaultApiFp(this.configuration).getFamilyMember(id, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get user family members
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getFamilyMembers(options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<UserFamily>>> {
-        return DefaultApiFp(this.configuration).getFamilyMembers(options).then((request) => request(this.axios, this.basePath));
+    public async getFamilyMembers(body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<FamilyMember>>> {
+        return DefaultApiFp(this.configuration).getFamilyMembers(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get generated file download url
      * @param {string} generatedFileId 
      * @param {string} userId 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getGeneratedFileDownloadUrl(generatedFileId: string, userId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserFileDownloadResponse>> {
-        return DefaultApiFp(this.configuration).getGeneratedFileDownloadUrl(generatedFileId, userId, options).then((request) => request(this.axios, this.basePath));
+    public async getGeneratedFileDownloadUrl(generatedFileId: string, userId: string, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserFileDownloadResponse>> {
+        return DefaultApiFp(this.configuration).getGeneratedFileDownloadUrl(generatedFileId, userId, body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get myfile languages
+     * @param {any} [body] Default response body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public async getLanguages(body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Language>>> {
+        return DefaultApiFp(this.configuration).getLanguages(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get NYCID user data
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getUser(options?: AxiosRequestConfig) : Promise<AxiosResponse<User>> {
-        return DefaultApiFp(this.configuration).getUser(options).then((request) => request(this.axios, this.basePath));
+    public async getUser(body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<User>> {
+        return DefaultApiFp(this.configuration).getUser(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get user activity.
      * @param {Filters} filters 
      * @param {number} page 
      * @param {number} limit 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getUserActivity(filters: Filters, page: number, limit: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetUserActivityResponse>> {
-        return DefaultApiFp(this.configuration).getUserActivity(filters, page, limit, options).then((request) => request(this.axios, this.basePath));
+    public async getUserActivity(filters: Filters, page: number, limit: number, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetUserActivityResponse>> {
+        return DefaultApiFp(this.configuration).getUserActivity(filters, page, limit, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get user family member files.
      * @param {string} userFamilyMemberId 
+     * @param {string} userId 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getUserFamilyMemberFiles(userFamilyMemberId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetUserFilesResponse>> {
-        return DefaultApiFp(this.configuration).getUserFamilyMemberFiles(userFamilyMemberId, options).then((request) => request(this.axios, this.basePath));
+    public async getUserFamilyMemberFiles(userFamilyMemberId: string, userId: string, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetUserFilesResponse>> {
+        return DefaultApiFp(this.configuration).getUserFamilyMemberFiles(userFamilyMemberId, userId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get cases for user file.
      * @param {string} fileId 
+     * @param {string} userId 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getUserFileCases(fileId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetUserFileCasesResponse>> {
-        return DefaultApiFp(this.configuration).getUserFileCases(fileId, options).then((request) => request(this.axios, this.basePath));
+    public async getUserFileCases(fileId: string, userId: string, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetUserFileCasesResponse>> {
+        return DefaultApiFp(this.configuration).getUserFileCases(fileId, userId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get download url for user file.
      * @param {string} fileId 
      * @param {string} uploadVersionId 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getUserFileDownloadUrl(fileId: string, uploadVersionId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserFileDownloadResponse>> {
-        return DefaultApiFp(this.configuration).getUserFileDownloadUrl(fileId, uploadVersionId, options).then((request) => request(this.axios, this.basePath));
+    public async getUserFileDownloadUrl(fileId: string, uploadVersionId: string, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserFileDownloadResponse>> {
+        return DefaultApiFp(this.configuration).getUserFileDownloadUrl(fileId, uploadVersionId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get user files.
+     * @param {string} userId 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getUserFiles(options?: AxiosRequestConfig) : Promise<AxiosResponse<GetUserFilesResponse>> {
-        return DefaultApiFp(this.configuration).getUserFiles(options).then((request) => request(this.axios, this.basePath));
+    public async getUserFiles(userId: string, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetUserFilesResponse>> {
+        return DefaultApiFp(this.configuration).getUserFiles(userId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get user workflows
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getUserWorkflows(options?: AxiosRequestConfig) : Promise<AxiosResponse<GetUserWorkFlowsResponse>> {
-        return DefaultApiFp(this.configuration).getUserWorkflows(options).then((request) => request(this.axios, this.basePath));
+    public async getUserWorkflows(body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<GetUserWorkFlowsResponse>> {
+        return DefaultApiFp(this.configuration).getUserWorkflows(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get myfile workflows
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async getWorkflows(options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Workflow>>> {
-        return DefaultApiFp(this.configuration).getWorkflows(options).then((request) => request(this.axios, this.basePath));
+    public async getWorkflows(body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Workflow>>> {
+        return DefaultApiFp(this.configuration).getWorkflows(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Post message to connections
      * @param {string} userId 
+     * @param {any} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async messagingPostMessageToWsConnectionsPost(userId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return DefaultApiFp(this.configuration).messagingPostMessageToWsConnectionsPost(userId, options).then((request) => request(this.axios, this.basePath));
+    public async messagingPostMessageToWsConnectionsPost(userId: string, body?: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
+        return DefaultApiFp(this.configuration).messagingPostMessageToWsConnectionsPost(userId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Remove user workflow
@@ -2550,8 +2872,19 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async updateCase(caseId: string, body?: UpdateCaseRequestBody, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse200>> {
+    public async updateCase(caseId: string, body?: UpdateCaseRequestBody, options?: AxiosRequestConfig) : Promise<AxiosResponse<UpdateCaseResponse>> {
         return DefaultApiFp(this.configuration).updateCase(caseId, body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Update case file
+     * @param {string} id 
+     * @param {UpdateCaseFileRequest} [body] Default response body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public async updateCaseFile(id: string, body?: UpdateCaseFileRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
+        return DefaultApiFp(this.configuration).updateCaseFile(id, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update generated file
@@ -2565,32 +2898,33 @@ export class DefaultApi extends BaseAPI {
     }
     /**
      * Update user.
+     * @param {string} userId 
      * @param {UpdateUserRequest} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async updateUser(body?: UpdateUserRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<UpdateUserResponse>> {
-        return DefaultApiFp(this.configuration).updateUser(body, options).then((request) => request(this.axios, this.basePath));
+    public async updateUser(userId: string, body?: UpdateUserRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<UpdateUserResponse>> {
+        return DefaultApiFp(this.configuration).updateUser(userId, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update user family member
-     * @param {UpdateUserFamilyRequest} [body] Default response body
+     * @param {UpdateFamilyMemberRequest} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async updateUserFamilyMember(body?: UpdateUserFamilyRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserFamily>> {
+    public async updateUserFamilyMember(body?: UpdateFamilyMemberRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<UpdateFamilyMemberResponse>> {
         return DefaultApiFp(this.configuration).updateUserFamilyMember(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update user file.
-     * @param {UpdateUserFamilyRequest} [body] Default response body
+     * @param {UpdateFamilyMemberRequest} [body] Default response body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async updateUserFile(body?: UpdateUserFamilyRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserFamily>> {
+    public async updateUserFile(body?: UpdateFamilyMemberRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<UpdateFamilyMemberResponse>> {
         return DefaultApiFp(this.configuration).updateUserFile(body, options).then((request) => request(this.axios, this.basePath));
     }
 }

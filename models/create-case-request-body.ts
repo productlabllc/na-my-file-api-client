@@ -23,29 +23,35 @@ export interface CreateCaseRequestBody {
      * @type {string}
      * @memberof CreateCaseRequestBody
      */
-    caseTitle?: string;
+    CaseTitle?: string;
     /**
      * 
      * @type {string}
      * @memberof CreateCaseRequestBody
      */
-    caseType: string;
+    CaseType: string;
     /**
      * 
      * @type {CaseAttributes}
      * @memberof CreateCaseRequestBody
      */
-    caseAttributes?: CaseAttributes;
+    CaseAttributes?: CaseAttributes;
     /**
      * 
      * @type {string}
      * @memberof CreateCaseRequestBody
      */
-    caseIdentifier: string;
+    CaseIdentifier: string;
     /**
      * 
      * @type {Array<string>}
      * @memberof CreateCaseRequestBody
      */
-    familyMemberIds?: Array<string>;
+    FamilyMemberIds?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCaseRequestBody
+     */
+    WorkflowId: string;
 }

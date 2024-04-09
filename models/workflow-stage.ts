@@ -29,23 +29,23 @@ export interface WorkflowStage {
      * @type {string}
      * @memberof WorkflowStage
      */
-    stageName?: string;
+    StageName?: string;
     /**
      * 
      * @type {string}
      * @memberof WorkflowStage
      */
-    workflowId?: string;
+    WorkflowId?: string;
     /**
      * 
      * @type {any}
      * @memberof WorkflowStage
      */
-    workflow?: any;
+    Workflow?: any;
     /**
      * 
      * @type {Array<WorkflowStageCriterion>}
      * @memberof WorkflowStage
      */
-    workflowStateCriteria?: Array<WorkflowStageCriterion>;
+    WorkflowStateCriteria?: Array<WorkflowStageCriterion>;
 }

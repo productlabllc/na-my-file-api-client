@@ -11,11 +11,34 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { UserFile } from './user-file';
 /**
  * 
  * @export
- * @interface GetCaseUserFilesResponse
+ * @interface Language
  */
-export interface GetCaseUserFilesResponse extends Array<UserFile> {
+export interface Language {
+    /**
+     * 
+     * @type {string}
+     * @memberof Language
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Language
+     */
+    Name: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Language
+     */
+    Code: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Language
+     */
+    CreatedAt: Date;
 }

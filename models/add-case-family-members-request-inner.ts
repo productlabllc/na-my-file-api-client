@@ -11,11 +11,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AddCaseApplicantsRequestInner } from './add-case-applicants-request-inner';
 /**
  * 
  * @export
- * @interface DeleteCaseApplicantsRequest
+ * @interface AddCaseFamilyMembersRequestInner
  */
-export interface DeleteCaseApplicantsRequest extends Array<AddCaseApplicantsRequestInner> {
+export interface AddCaseFamilyMembersRequestInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof AddCaseFamilyMembersRequestInner
+     */
+    UserFamilyMemberId: string;
 }

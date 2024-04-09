@@ -22,23 +22,23 @@ export interface CreateUserFileRequestFiles {
      * @type {string}
      * @memberof CreateUserFileRequestFiles
      */
-    contentType: string;
+    ContentType: string;
     /**
      * 
      * @type {string}
      * @memberof CreateUserFileRequestFiles
      */
-    originalFilename: string;
+    OriginalFilename: string;
     /**
      * 
      * @type {number}
      * @memberof CreateUserFileRequestFiles
      */
-    sizeInBytes: number;
+    SizeInBytes: number;
     /**
      * 
      * @type {number}
      * @memberof CreateUserFileRequestFiles
      */
-    pageNumber: number;
+    PageNumber: number;
 }

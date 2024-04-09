@@ -11,11 +11,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse200 } from './inline-response200';
+import { ModelCase } from './model-case';
 /**
  * 
  * @export
  * @interface GetCaseResponse
  */
-export interface GetCaseResponse extends Array<InlineResponse200> {
+export interface GetCaseResponse extends Array<ModelCase> {
 }

@@ -11,65 +11,67 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { CaseApplicant } from './case-applicant';
 import { User } from './user';
+import { UserFile } from './user-file';
 /**
  * 
  * @export
- * @interface CaseNote
+ * @interface FamilyMember
  */
-export interface CaseNote {
+export interface FamilyMember {
     /**
      * 
      * @type {string}
-     * @memberof CaseNote
+     * @memberof FamilyMember
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof CaseNote
+     * @memberof FamilyMember
      */
-    NoteText?: string;
+    FirstName?: string;
     /**
      * 
      * @type {string}
-     * @memberof CaseNote
+     * @memberof FamilyMember
      */
-    ParentNoteId?: string;
+    LastName?: string;
     /**
      * 
      * @type {string}
-     * @memberof CaseNote
+     * @memberof FamilyMember
      */
-    AuthorUserId?: string;
+    UserId?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof FamilyMember
+     */
+    DOB?: Date;
     /**
      * 
      * @type {string}
-     * @memberof CaseNote
+     * @memberof FamilyMember
      */
-    NoteAudienceScope?: string;
+    Relationship?: string;
     /**
      * 
      * @type {User}
-     * @memberof CaseNote
+     * @memberof FamilyMember
      */
-    AuthorUser?: User;
+    User?: User;
     /**
      * 
-     * @type {string}
-     * @memberof CaseNote
+     * @type {Array<CaseApplicant>}
+     * @memberof FamilyMember
      */
-    CaseId?: string;
+    CaseApplicants?: Array<CaseApplicant>;
     /**
      * 
-     * @type {Array<any>}
-     * @memberof CaseNote
+     * @type {Array<UserFile>}
+     * @memberof FamilyMember
      */
-    CaseNoteReplies?: Array<any>;
-    /**
-     * 
-     * @type {any}
-     * @memberof CaseNote
-     */
-    CaseNote?: any;
+    UserFiles?: Array<UserFile>;
 }

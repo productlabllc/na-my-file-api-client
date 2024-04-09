@@ -28,29 +28,29 @@ export interface AddWorkFlowResponse {
      * @type {string}
      * @memberof AddWorkFlowResponse
      */
-    firstName?: string;
+    FirstName?: string;
     /**
      * 
      * @type {string}
      * @memberof AddWorkFlowResponse
      */
-    lastName?: string;
+    LastName?: string;
     /**
      * 
      * @type {string}
      * @memberof AddWorkFlowResponse
      */
-    email?: string;
+    Email?: string;
     /**
      * 
      * @type {string}
      * @memberof AddWorkFlowResponse
      */
-    legacyId?: string;
+    LegacyId?: string;
     /**
      * 
      * @type {string}
      * @memberof AddWorkFlowResponse
      */
-    idpId?: string;
+    IdpId?: string;
 }

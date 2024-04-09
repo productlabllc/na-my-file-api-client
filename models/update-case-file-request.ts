@@ -11,23 +11,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { UserFile } from './user-file';
 /**
  * 
  * @export
- * @interface CreateUserUploadResponse
+ * @interface UpdateCaseFileRequest
  */
-export interface CreateUserUploadResponse {
+export interface UpdateCaseFileRequest {
     /**
      * 
      * @type {string}
-     * @memberof CreateUserUploadResponse
+     * @memberof UpdateCaseFileRequest
      */
-    uploadUrl?: string;
-    /**
-     * 
-     * @type {UserFile}
-     * @memberof CreateUserUploadResponse
-     */
-    userFileData?: UserFile;
+    Status: string;
 }

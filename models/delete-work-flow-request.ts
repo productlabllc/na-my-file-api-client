@@ -22,5 +22,5 @@ export interface DeleteWorkFlowRequest {
      * @type {string}
      * @memberof DeleteWorkFlowRequest
      */
-    workflowId: string;
+    WorkflowId: string;
 }

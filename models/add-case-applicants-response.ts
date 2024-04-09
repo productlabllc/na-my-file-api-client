@@ -14,25 +14,31 @@
 /**
  * 
  * @export
- * @interface UpdateUser
+ * @interface AddCaseApplicantsResponse
  */
-export interface UpdateUser {
+export interface AddCaseApplicantsResponse {
     /**
      * 
      * @type {string}
-     * @memberof UpdateUser
+     * @memberof AddCaseApplicantsResponse
      */
-    firstName?: string;
+    CaseId?: string;
     /**
      * 
      * @type {string}
-     * @memberof UpdateUser
+     * @memberof AddCaseApplicantsResponse
      */
-    lastName?: string;
+    UserFamilyMemberId?: string;
     /**
      * 
-     * @type {string}
-     * @memberof UpdateUser
+     * @type {any}
+     * @memberof AddCaseApplicantsResponse
      */
-    email?: string;
+    UserFamilyMember?: any;
+    /**
+     * 
+     * @type {any}
+     * @memberof AddCaseApplicantsResponse
+     */
+    _Case?: any;
 }

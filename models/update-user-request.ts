@@ -22,19 +22,19 @@ export interface UpdateUserRequest {
      * @type {string}
      * @memberof UpdateUserRequest
      */
-    firstName?: string;
+    FirstName?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateUserRequest
      */
-    lastName?: string;
+    LastName?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateUserRequest
      */
-    email?: string;
+    Email?: string;
     /**
      * 
      * @type {Date}
@@ -46,17 +46,17 @@ export interface UpdateUserRequest {
      * @type {string}
      * @memberof UpdateUserRequest
      */
-    languageId?: string;
+    LanguageId?: string;
     /**
      * 
      * @type {Date}
      * @memberof UpdateUserRequest
      */
-    tOSAcceptedAt?: Date;
+    TOSAcceptedAt?: Date;
     /**
      * 
      * @type {Date}
      * @memberof UpdateUserRequest
      */
-    pPAcceptedAt?: Date;
+    PPAcceptedAt?: Date;
 }

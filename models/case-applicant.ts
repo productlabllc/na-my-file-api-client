@@ -22,23 +22,23 @@ export interface CaseApplicant {
      * @type {string}
      * @memberof CaseApplicant
      */
-    id: string;
+    CaseId?: string;
     /**
      * 
      * @type {string}
      * @memberof CaseApplicant
      */
-    userFamilyMemberId?: string;
+    UserFamilyMemberId?: string;
     /**
      * 
      * @type {any}
      * @memberof CaseApplicant
      */
-    userFamilyMember?: any;
+    UserFamilyMember?: any;
     /**
      * 
      * @type {any}
      * @memberof CaseApplicant
      */
-    _case?: any;
+    _Case?: any;
 }

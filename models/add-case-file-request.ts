@@ -22,5 +22,5 @@ export interface AddCaseFileRequest {
      * @type {Array<string>}
      * @memberof AddCaseFileRequest
      */
-    userFileIds: Array<string>;
+    UserFileIds: Array<string>;
 }

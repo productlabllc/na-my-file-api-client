@@ -17,61 +17,61 @@ import { UserFile } from './user-file';
 /**
  * 
  * @export
- * @interface UserFamily
+ * @interface CreateFamilyMemberResponse
  */
-export interface UserFamily {
+export interface CreateFamilyMemberResponse {
     /**
      * 
      * @type {string}
-     * @memberof UserFamily
+     * @memberof CreateFamilyMemberResponse
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof UserFamily
+     * @memberof CreateFamilyMemberResponse
      */
-    firstName?: string;
+    FirstName?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserFamily
+     * @memberof CreateFamilyMemberResponse
      */
-    lastName?: string;
+    LastName?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserFamily
+     * @memberof CreateFamilyMemberResponse
      */
-    userId?: string;
+    UserId?: string;
     /**
      * 
      * @type {Date}
-     * @memberof UserFamily
+     * @memberof CreateFamilyMemberResponse
      */
     DOB?: Date;
     /**
      * 
      * @type {string}
-     * @memberof UserFamily
+     * @memberof CreateFamilyMemberResponse
      */
-    relationship?: string;
+    Relationship?: string;
     /**
      * 
      * @type {User}
-     * @memberof UserFamily
+     * @memberof CreateFamilyMemberResponse
      */
-    user?: User;
+    User?: User;
     /**
      * 
      * @type {Array<CaseApplicant>}
-     * @memberof UserFamily
+     * @memberof CreateFamilyMemberResponse
      */
-    caseApllicants?: Array<CaseApplicant>;
+    CaseApplicants?: Array<CaseApplicant>;
     /**
      * 
      * @type {Array<UserFile>}
-     * @memberof UserFamily
+     * @memberof CreateFamilyMemberResponse
      */
-    userFiles?: Array<UserFile>;
+    UserFiles?: Array<UserFile>;
 }

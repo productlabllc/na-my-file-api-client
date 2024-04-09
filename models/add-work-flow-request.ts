@@ -22,5 +22,5 @@ export interface AddWorkFlowRequest {
      * @type {string}
      * @memberof AddWorkFlowRequest
      */
-    workflowId: string;
+    WorkflowId: string;
 }

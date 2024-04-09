@@ -29,29 +29,29 @@ export interface CaseFile {
      * @type {string}
      * @memberof CaseFile
      */
-    userFileId?: string;
+    UserFileId?: string;
     /**
      * 
      * @type {string}
      * @memberof CaseFile
      */
-    createdByUserId?: string;
+    CreatedByUserId?: string;
     /**
      * 
      * @type {string}
      * @memberof CaseFile
      */
-    caseId?: string;
+    CaseId?: string;
     /**
      * 
      * @type {any}
      * @memberof CaseFile
      */
-    _case?: any;
+    _Case?: any;
     /**
      * 
      * @type {UserFile}
      * @memberof CaseFile
      */
-    userFile?: UserFile;
+    UserFile?: UserFile;
 }

@@ -28,29 +28,29 @@ export interface User {
      * @type {string}
      * @memberof User
      */
-    firstName?: string;
+    FirstName?: string;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    lastName?: string;
+    LastName?: string;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    email?: string;
+    Email?: string;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    legacyId?: string;
+    LegacyId?: string;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    idpId?: string;
+    IdpId?: string;
 }

@@ -29,29 +29,29 @@ export interface CaseTeamAssignment {
      * @type {string}
      * @memberof CaseTeamAssignment
      */
-    userId?: string;
+    UserId?: string;
     /**
      * 
      * @type {string}
      * @memberof CaseTeamAssignment
      */
-    caseId?: string;
+    CaseId?: string;
     /**
      * 
      * @type {string}
      * @memberof CaseTeamAssignment
      */
-    caseRole?: string;
+    CaseRole?: string;
     /**
      * 
      * @type {any}
      * @memberof CaseTeamAssignment
      */
-    _case?: any;
+    _Case?: any;
     /**
      * 
      * @type {User}
      * @memberof CaseTeamAssignment
      */
-    user?: User;
+    User?: User;
 }

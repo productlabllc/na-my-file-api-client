@@ -23,35 +23,35 @@ export interface UpdateCaseRequestBody {
      * @type {string}
      * @memberof UpdateCaseRequestBody
      */
-    caseTitle?: string;
+    CaseTitle?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateCaseRequestBody
      */
-    caseType?: string;
+    CaseType?: string;
     /**
      * 
      * @type {number}
      * @memberof UpdateCaseRequestBody
      */
-    percentComplete?: number;
+    PercentComplete?: number;
     /**
      * 
      * @type {CaseAttributes}
      * @memberof UpdateCaseRequestBody
      */
-    caseAttributes?: CaseAttributes;
+    CaseAttributes?: CaseAttributes;
     /**
      * 
      * @type {string}
      * @memberof UpdateCaseRequestBody
      */
-    status?: string;
+    Status?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateCaseRequestBody
      */
-    agencyCaseIdentifier?: string;
+    AgencyCaseIdentifier?: string;
 }

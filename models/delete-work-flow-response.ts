@@ -28,29 +28,29 @@ export interface DeleteWorkFlowResponse {
      * @type {string}
      * @memberof DeleteWorkFlowResponse
      */
-    firstName?: string;
+    FirstName?: string;
     /**
      * 
      * @type {string}
      * @memberof DeleteWorkFlowResponse
      */
-    lastName?: string;
+    LastName?: string;
     /**
      * 
      * @type {string}
      * @memberof DeleteWorkFlowResponse
      */
-    email?: string;
+    Email?: string;
     /**
      * 
      * @type {string}
      * @memberof DeleteWorkFlowResponse
      */
-    legacyId?: string;
+    LegacyId?: string;
     /**
      * 
      * @type {string}
      * @memberof DeleteWorkFlowResponse
      */
-    idpId?: string;
+    IdpId?: string;
 }

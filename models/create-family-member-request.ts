@@ -22,13 +22,13 @@ export interface CreateFamilyMemberRequest {
      * @type {string}
      * @memberof CreateFamilyMemberRequest
      */
-    firstName: string;
+    FirstName: string;
     /**
      * 
      * @type {string}
      * @memberof CreateFamilyMemberRequest
      */
-    lastName: string;
+    LastName: string;
     /**
      * 
      * @type {Date}
@@ -40,5 +40,5 @@ export interface CreateFamilyMemberRequest {
      * @type {string}
      * @memberof CreateFamilyMemberRequest
      */
-    relationship: string;
+    Relationship: string;
 }

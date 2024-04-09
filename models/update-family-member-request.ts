@@ -14,37 +14,37 @@
 /**
  * 
  * @export
- * @interface UpdateUserFamilyRequest
+ * @interface UpdateFamilyMemberRequest
  */
-export interface UpdateUserFamilyRequest {
+export interface UpdateFamilyMemberRequest {
     /**
      * 
      * @type {string}
-     * @memberof UpdateUserFamilyRequest
+     * @memberof UpdateFamilyMemberRequest
      */
-    firstName?: string;
+    FirstName?: string;
     /**
      * 
      * @type {string}
-     * @memberof UpdateUserFamilyRequest
+     * @memberof UpdateFamilyMemberRequest
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof UpdateUserFamilyRequest
+     * @memberof UpdateFamilyMemberRequest
      */
-    lastName?: string;
+    LastName?: string;
     /**
      * 
      * @type {Date}
-     * @memberof UpdateUserFamilyRequest
+     * @memberof UpdateFamilyMemberRequest
      */
-    dob?: Date;
+    Dob?: Date;
     /**
      * 
      * @type {string}
-     * @memberof UpdateUserFamilyRequest
+     * @memberof UpdateFamilyMemberRequest
      */
-    relationship?: string;
+    Relationship?: string;
 }

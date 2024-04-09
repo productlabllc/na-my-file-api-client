@@ -28,47 +28,47 @@ export interface CaseCriterion {
      * @type {string}
      * @memberof CaseCriterion
      */
-    status?: string;
+    Status?: string;
     /**
      * 
      * @type {string}
      * @memberof CaseCriterion
      */
-    lastModifiedByUserId?: string;
+    LastModifiedByUserId?: string;
     /**
      * 
      * @type {string}
      * @memberof CaseCriterion
      */
-    caseId?: string;
+    CaseId?: string;
     /**
      * 
      * @type {string}
      * @memberof CaseCriterion
      */
-    userId?: string;
+    UserId?: string;
     /**
      * 
      * @type {string}
      * @memberof CaseCriterion
      */
-    workflowStageCriterionId?: string;
+    WorkflowStageCriterionId?: string;
     /**
      * 
      * @type {any}
      * @memberof CaseCriterion
      */
-    lastModifiedByUser?: any;
+    LastModifiedByUser?: any;
     /**
      * 
      * @type {any}
      * @memberof CaseCriterion
      */
-    _case?: any;
+    _Case?: any;
     /**
      * 
      * @type {any}
      * @memberof CaseCriterion
      */
-    workflowStageCriterion?: any;
+    WorkflowStageCriterion?: any;
 }

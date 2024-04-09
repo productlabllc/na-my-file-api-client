@@ -28,29 +28,29 @@ export interface UpdateUserResponse {
      * @type {string}
      * @memberof UpdateUserResponse
      */
-    firstName?: string;
+    FirstName?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateUserResponse
      */
-    lastName?: string;
+    LastName?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateUserResponse
      */
-    email?: string;
+    Email?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateUserResponse
      */
-    legacyId?: string;
+    LegacyId?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateUserResponse
      */
-    idpId?: string;
+    IdpId?: string;
 }

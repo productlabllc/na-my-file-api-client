@@ -11,11 +11,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { UserFile } from './user-file';
+import { AddCaseFamilyMembersRequestInner } from './add-case-family-members-request-inner';
 /**
  * 
  * @export
- * @interface UserFileList
+ * @interface DeleteCaseFamilyMembersRequest
  */
-export interface UserFileList extends Array<UserFile> {
+export interface DeleteCaseFamilyMembersRequest extends Array<AddCaseFamilyMembersRequestInner> {
 }

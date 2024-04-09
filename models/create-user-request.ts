@@ -22,19 +22,19 @@ export interface CreateUserRequest {
      * @type {string}
      * @memberof CreateUserRequest
      */
-    firstName: string;
+    FirstName: string;
     /**
      * 
      * @type {string}
      * @memberof CreateUserRequest
      */
-    lastName: string;
+    LastName: string;
     /**
      * 
      * @type {string}
      * @memberof CreateUserRequest
      */
-    email: string;
+    Email: string;
     /**
      * 
      * @type {Date}
@@ -46,11 +46,11 @@ export interface CreateUserRequest {
      * @type {string}
      * @memberof CreateUserRequest
      */
-    languageId: string;
+    LanguageId: string;
     /**
      * 
      * @type {Array<string>}
      * @memberof CreateUserRequest
      */
-    workflows?: Array<string>;
+    Workflows?: Array<string>;
 }

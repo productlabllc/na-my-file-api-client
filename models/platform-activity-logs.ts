@@ -28,41 +28,41 @@ export interface PlatformActivityLogs {
      * @type {string}
      * @memberof PlatformActivityLogs
      */
-    activityType?: string;
+    ActivityType?: string;
     /**
      * 
      * @type {string}
      * @memberof PlatformActivityLogs
      */
-    activityValue?: string;
+    ActivityValue?: string;
     /**
      * 
      * @type {string}
      * @memberof PlatformActivityLogs
      */
-    relatedId?: string;
+    RelatedId?: string;
     /**
      * 
      * @type {Date}
      * @memberof PlatformActivityLogs
      */
-    createdAt?: Date;
+    CreatedAt?: Date;
     /**
      * 
      * @type {string}
      * @memberof PlatformActivityLogs
      */
-    activityGeneratedByUserId?: string;
+    ActivityGeneratedByUserId?: string;
     /**
      * 
      * @type {any}
      * @memberof PlatformActivityLogs
      */
-    metadata?: any;
+    Metadata?: any;
     /**
      * 
      * @type {any}
      * @memberof PlatformActivityLogs
      */
-    user?: any;
+    User?: any;
 }

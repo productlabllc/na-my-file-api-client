@@ -20,73 +20,73 @@ import { CaseTeamAssignment } from './case-team-assignment';
 /**
  * 
  * @export
- * @interface InlineResponse200
+ * @interface UpdateCaseResponse
  */
-export interface InlineResponse200 {
+export interface UpdateCaseResponse {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse200
+     * @memberof UpdateCaseResponse
      */
-    title?: string;
+    Title?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse200
+     * @memberof UpdateCaseResponse
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse200
+     * @memberof UpdateCaseResponse
      */
-    caseType?: string;
+    CaseType?: string;
     /**
      * 
      * @type {number}
-     * @memberof InlineResponse200
+     * @memberof UpdateCaseResponse
      */
-    percentComplete?: number;
+    PercentComplete?: number;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse200
+     * @memberof UpdateCaseResponse
      */
-    agencyCaseIdentifier?: string;
+    AgencyCaseIdentifier?: string;
     /**
      * 
      * @type {CaseAttributes}
-     * @memberof InlineResponse200
+     * @memberof UpdateCaseResponse
      */
-    caseAttributes?: CaseAttributes;
+    CaseAttributes?: CaseAttributes;
     /**
      * 
      * @type {Array<CaseCriterion>}
-     * @memberof InlineResponse200
+     * @memberof UpdateCaseResponse
      */
-    caseCriteria?: Array<CaseCriterion>;
+    CaseCriteria?: Array<CaseCriterion>;
     /**
      * 
      * @type {Array<CaseNote>}
-     * @memberof InlineResponse200
+     * @memberof UpdateCaseResponse
      */
-    caseNotes?: Array<CaseNote>;
+    CaseNotes?: Array<CaseNote>;
     /**
      * 
      * @type {Array<CaseTeamAssignment>}
-     * @memberof InlineResponse200
+     * @memberof UpdateCaseResponse
      */
-    caseTeamAssignments?: Array<CaseTeamAssignment>;
+    CaseTeamAssignments?: Array<CaseTeamAssignment>;
     /**
      * 
      * @type {Array<CaseFile>}
-     * @memberof InlineResponse200
+     * @memberof UpdateCaseResponse
      */
-    caseFiles?: Array<CaseFile>;
+    CaseFiles?: Array<CaseFile>;
     /**
      * 
      * @type {Array<CaseApplicant>}
-     * @memberof InlineResponse200
+     * @memberof UpdateCaseResponse
      */
-    caseApplicants?: Array<CaseApplicant>;
+    CaseApplicants?: Array<CaseApplicant>;
 }

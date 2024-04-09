@@ -28,29 +28,29 @@ export interface UpdateGeneratedFileRequest {
      * @type {string}
      * @memberof UpdateGeneratedFileRequest
      */
-    contentType?: string;
+    ContentType?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateGeneratedFileRequest
      */
-    originalFilename?: string;
+    OriginalFilename?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateGeneratedFileRequest
      */
-    status?: string;
+    Status?: string;
     /**
      * 
      * @type {number}
      * @memberof UpdateGeneratedFileRequest
      */
-    sizeInBytes?: number;
+    SizeInBytes?: number;
     /**
      * 
      * @type {string}
      * @memberof UpdateGeneratedFileRequest
      */
-    title?: string;
+    Title?: string;
 }

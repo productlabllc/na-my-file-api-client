@@ -28,77 +28,77 @@ export interface UserFile {
      * @type {string}
      * @memberof UserFile
      */
-    legacyId?: string;
+    LegacyId?: string;
     /**
      * 
      * @type {string}
      * @memberof UserFile
      */
-    contentType: string;
+    ContentType: string;
     /**
      * 
      * @type {string}
      * @memberof UserFile
      */
-    activeVersionId?: string;
+    ActiveVersionId?: string;
     /**
      * 
      * @type {string}
      * @memberof UserFile
      */
-    originalFilename: string;
+    OriginalFilename: string;
     /**
      * 
      * @type {string}
      * @memberof UserFile
      */
-    title: string;
+    Title: string;
     /**
      * 
      * @type {Date}
      * @memberof UserFile
      */
-    createdAt?: Date;
+    CreatedAt?: Date;
     /**
      * 
      * @type {Date}
      * @memberof UserFile
      */
-    lastModifiedAt?: Date;
+    LastModifiedAt?: Date;
     /**
      * 
      * @type {string}
      * @memberof UserFile
      */
-    ownerUserId?: string;
+    OwnerUserId?: string;
     /**
      * 
      * @type {Array<any>}
      * @memberof UserFile
      */
-    uploadedMediaAssetVersions?: Array<any>;
+    UploadedMediaAssetVersions?: Array<any>;
     /**
      * 
      * @type {Array<string>}
      * @memberof UserFile
      */
-    uploadUrls?: Array<string>;
+    UploadUrls?: Array<string>;
     /**
      * 
      * @type {string}
      * @memberof UserFile
      */
-    createdByUserId?: string;
+    CreatedByUserId?: string;
     /**
      * 
      * @type {string}
      * @memberof UserFile
      */
-    lastModifiedByUserId?: string;
+    LastModifiedByUserId?: string;
     /**
      * 
      * @type {string}
      * @memberof UserFile
      */
-    uploadUrl?: string;
+    UploadUrl?: string;
 }

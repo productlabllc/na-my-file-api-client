@@ -28,29 +28,29 @@ export interface WorkflowStageCriterion {
      * @type {string}
      * @memberof WorkflowStageCriterion
      */
-    caseWorkflowStageId?: string;
+    CaseWorkflowStageId?: string;
     /**
      * 
      * @type {string}
      * @memberof WorkflowStageCriterion
      */
-    name?: string;
+    Name?: string;
     /**
      * 
      * @type {Array<any>}
      * @memberof WorkflowStageCriterion
      */
-    caseCriteria?: Array<any>;
+    CaseCriteria?: Array<any>;
     /**
      * 
      * @type {string}
      * @memberof WorkflowStageCriterion
      */
-    criterionFulfillmentType?: string;
+    CriterionFulfillmentType?: string;
     /**
      * 
      * @type {any}
      * @memberof WorkflowStageCriterion
      */
-    workflowStage?: any;
+    WorkflowStage?: any;
 }

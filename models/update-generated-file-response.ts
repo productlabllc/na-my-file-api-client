@@ -28,41 +28,41 @@ export interface UpdateGeneratedFileResponse {
      * @type {string}
      * @memberof UpdateGeneratedFileResponse
      */
-    contentType?: string;
+    ContentType?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateGeneratedFileResponse
      */
-    originalFilename?: string;
+    OriginalFilename?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateGeneratedFileResponse
      */
-    status?: string;
+    Status?: string;
     /**
      * 
      * @type {number}
      * @memberof UpdateGeneratedFileResponse
      */
-    sizeInBytes?: number;
+    SizeInBytes?: number;
     /**
      * 
      * @type {Date}
      * @memberof UpdateGeneratedFileResponse
      */
-    createdAt?: Date;
+    CreatedAt?: Date;
     /**
      * 
      * @type {Date}
      * @memberof UpdateGeneratedFileResponse
      */
-    lastModifiedAt?: Date;
+    LastModifiedAt?: Date;
     /**
      * 
      * @type {string}
      * @memberof UpdateGeneratedFileResponse
      */
-    title?: string;
+    Title?: string;
 }

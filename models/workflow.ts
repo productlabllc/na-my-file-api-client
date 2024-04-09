@@ -29,17 +29,17 @@ export interface Workflow {
      * @type {Array<WorkflowStage>}
      * @memberof Workflow
      */
-    workflowStages?: Array<WorkflowStage>;
+    WorkflowStages?: Array<WorkflowStage>;
     /**
      * 
      * @type {string}
      * @memberof Workflow
      */
-    name?: string;
+    Name?: string;
     /**
      * 
      * @type {string}
      * @memberof Workflow
      */
-    description?: string;
+    Description?: string;
 }
