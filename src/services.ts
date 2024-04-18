@@ -643,13 +643,17 @@ requestBody
 	 * @returns UpdateUserResponse Default response body
 	 * @throws ApiError
 	 */
-	public static updateUser(data: $OpenApiTs['/users']['patch']['req'] = {}): CancelablePromise<$OpenApiTs['/users']['patch']['res'][200]> {
+	public static updateUser(data: $OpenApiTs['/users']['patch']['req']): CancelablePromise<$OpenApiTs['/users']['patch']['res'][200]> {
 		const {
-                    requestBody
+                    userId,
+requestBody
                 } = data;
 		return __request(OpenAPI, {
 			method: 'PATCH',
 			url: '/users',
+			path: {
+				userId
+			},
 			body: requestBody,
 			mediaType: 'application/json',
 		});

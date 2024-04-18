@@ -1,0 +1,5 @@
+Error opening file "/Users/aleks/codingWork/na-myfile/my-file-api/custom-swagger.json" 
+ENOENT: no such file or directory, open '/Users/aleks/codingWork/na-myfile/my-file-api/custom-swagger.json'
+JSONParserError: Error opening file "/Users/aleks/codingWork/na-myfile/my-file-api/custom-swagger.json" 
+ENOENT: no such file or directory, open '/Users/aleks/codingWork/na-myfile/my-file-api/custom-swagger.json'
+    at Object.read (/Users/aleks/codingWork/na-myfile/na-my-file-api-client/node_modules/@apidevtools/json-schema-ref-parser/dist/lib/resolvers/file.js:61:19)

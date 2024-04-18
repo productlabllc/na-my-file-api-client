@@ -920,6 +920,7 @@ export type $OpenApiTs = {
                  * Default response body
                  */
                 requestBody?: UpdateUserRequest;
+                userId: string;
             };
             res: {
                 /**
