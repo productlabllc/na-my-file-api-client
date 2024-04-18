@@ -1,7 +1,7 @@
 {
   "name": "@myfile/api-client",
   "version": "1.1.1",
-  "description": "OpenAPI client for My File NYC",
+  "description": "OpenAPI client for My File",
   "author": "Wes Reid <wereid@nycopportunity.nyc.gov>",
   "keywords": [
     "axios",
