@@ -11,8 +11,8 @@
     ""
   ],
   "license": "Unlicense",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "build": "tsc --outDir dist/",
     "prepublishOnly": "npm run build",
@@ -23,5 +23,8 @@
     "@hey-api/openapi-ts": "^0.38.1",
     "@types/node": "^20.12.7",
     "typescript": "^5.4.5"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
